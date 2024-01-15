@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require('path');
 const inquirer = require("inquirer");
-const generateMarkdown = require("./utils/generateMarkdown");
+const generateMarkdown = require("./generateMarkdown");
 
 // array of questions for user
 const questions = [
@@ -18,53 +18,57 @@ function init() {
         .prompt([
             {
                 type: 'input',
-                name: 'Project title',
+                name: 'title',
                 message: 'What is the title of your project?',
             },
             {
                 type: 'input',
-                name: 'Description',
+                name: 'description',
                 message: 'Please give a description of your project:',
             },
+            // {
+            //     type: 'input',
+            //     name: 'contents',
+            //     message: 'Please list out the sections you want to include in your table of contents:',
+            // },
             {
                 type: 'input',
-                name: 'Table of contents',
-                message: 'Please list out the sections you want to include in your table of contents:',
-            },
-            {
-                type: 'input',
-                name: 'Installation',
+                name: 'installation',
                 message: 'How would a user install this application?',
             },
             {
                 type: 'input',
-                name: 'Usage',
+                name: 'usage',
                 message: 'How do you use this application?',
             },
             {
                 type: 'input',
-                name: 'License',
+                name: 'license',
                 message: 'Please select one of the following licenses for this application:',
             },
             {
                 type: 'input',
-                name: 'Contribution',
+                name: 'contribution',
                 message: 'List any resources used in this application eligable for recognition',
             },
             {
                 type: 'input',
-                name: 'Tests',
+                name: 'tests',
                 message: 'How should the user test this application?',
             },
             {
                 type: 'input',
-                name: 'Questions',
+                name: 'questions',
                 message: 'Enter your email address, so users can contact you with questions:',
             },
-        ])};
+        ])
         .then((answers) => {
-            generateMarkdown(answers);
-        });
+            console.log(answers);
+            const readmeContent = generateMarkdown(answers);
 
-    // function call to initialize program
-    init();
+            // Write to file
+        });
+};
+
+// function call to initialize program
+init();
